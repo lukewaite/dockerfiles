@@ -6,7 +6,7 @@ RUN apk --no-cache add \
 	less \
 	python3 \
 	py3-pip \
-	&& pip install awscli \
+	&& pip3 install awscli \
 	&& mkdir -p /root/.aws \
 	&& { \
 		echo '[default]'; \

@@ -1,5 +1,5 @@
 FROM lukewaite/awscli
 
-RUN  pip install aws-shell
+RUN  pip3 install aws-shell
 
 ENTRYPOINT [ "aws-shell" ]
