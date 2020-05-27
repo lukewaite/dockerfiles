@@ -1,11 +1,11 @@
-FROM python:3-alpine
+FROM alpine
 
 RUN \
     apk --no-cache add \
 	groff \
 	less \
 	git \
-	&& pip3 install awscli \
+	curl \
 	&& mkdir -p /root/.aws \
 	&& { \
 		echo '[default]'; \
@@ -15,4 +15,10 @@ RUN \
 		echo 'aws_secret_access_key = $AMAZON_SECRET_ACCESS_KEY'; \
 	} > /root/.aws/config
 
-ENTRYPOINT [ "aws" ]
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN unzip awscliv2.zip
+RUN ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+
+
+RUN apk add bash
+ENTRYPOINT [ "bash" ]
